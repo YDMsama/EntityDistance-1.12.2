@@ -1,0 +1,14 @@
+{
+    "compatibilityLevel": "JAVA_8",
+    "package": "com.yourname.modid.mixin",
+    "refmap": "refmap.example.json",
+    "mixins": [
+        "YourMixin",
+        "EntityZombieMixin",
+        "MixinEntityRenderer",
+        "RenderMixin",
+        "EntityTrackerMixin"
+    ],
+    "client": ["MixinMinecraft"],
+    "server": []
+}
