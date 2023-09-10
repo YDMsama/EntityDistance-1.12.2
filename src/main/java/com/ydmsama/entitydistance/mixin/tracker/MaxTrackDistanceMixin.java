@@ -1,5 +1,6 @@
-package com.yourname.modid.mixin;
+package com.ydmsama.entitydistance.mixin.tracker;
 
+import com.ydmsama.entitydistance.config.ModConfig;
 import net.minecraft.world.WorldServer;
 import net.minecraft.entity.EntityTracker;
 import org.spongepowered.asm.mixin.Mixin;
@@ -8,14 +9,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+
 @Mixin(EntityTracker.class)
-public class EntityTrackerMixin {
+public class MaxTrackDistanceMixin {
 
     @Shadow
     private int maxTrackingDistanceThreshold;
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onInit(WorldServer theWorldIn, CallbackInfo ci) {
-        this.maxTrackingDistanceThreshold *= 2;  // Modify the value to be twice as large
+        this.maxTrackingDistanceThreshold *= ModConfig.trackDistanceMultiplier;
+//        this.maxTrackingDistanceThreshold *= 2;
     }
 }

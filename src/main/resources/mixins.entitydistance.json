@@ -1,0 +1,14 @@
+{
+    "compatibilityLevel": "JAVA_8",
+    "package": "com.ydmsama.entitydistance.mixin",
+    "refmap": "refmap.entitydistance.json",
+    "mixins": [
+      "render.RenderDistanceMixin",
+      "tracker.MaxTrackDistanceMixin",
+      "tracker.TrackDistanceMixin",
+      "tracker.EntityTrackerEntryAccessor"
+    ],
+    "client": [
+    ],
+    "server": []
+}
