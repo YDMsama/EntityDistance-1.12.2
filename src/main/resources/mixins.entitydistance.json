@@ -6,7 +6,9 @@
       "render.RenderDistanceMixin",
       "tracker.MaxTrackDistanceMixin",
       "tracker.TrackDistanceMixin",
-      "tracker.EntityTrackerEntryAccessor"
+      "tracker.EntityTrackerEntryAccessor",
+      "tracker.EntityTrackerAccessor",
+      "gui.GuiOptionsAccessor"
     ],
     "client": [
     ],
