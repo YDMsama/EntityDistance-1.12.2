@@ -54,6 +54,8 @@ public class EntityDistance {
         @SubscribeEvent
         public static void onConfigChangedEvent(OnConfigChangedEvent event) {
             if (event.getModID().equals(EntityDistance.MOD_ID)) {
+                int valueAsInt = (int)(Math.round(ModConfig.renderDistanceMultiplier * 100));
+                ModConfig.renderDistanceMultiplier = valueAsInt / 100.0;
                 ConfigManager.sync(EntityDistance.MOD_ID, Config.Type.INSTANCE);
 
                 MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();

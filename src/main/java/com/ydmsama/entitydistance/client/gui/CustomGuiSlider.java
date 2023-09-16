@@ -68,6 +68,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @SideOnly(Side.CLIENT)
 public class CustomGuiSlider extends GuiButton
 {
@@ -140,7 +143,7 @@ public class CustomGuiSlider extends GuiButton
                 {
                     this.sliderPosition = 1.0F;
                 }
-                this.sliderPosition = roundToDecimalPlaces(Math.round(this.sliderPosition * valStep) / valStep, 2);
+                this.sliderPosition = Math.round(this.sliderPosition * valStep) / valStep;
 
                 this.displayString = this.getDisplayString();
                 this.responder.setEntryValue(this.id, this.getSliderValue());
@@ -153,8 +156,11 @@ public class CustomGuiSlider extends GuiButton
     }
 
     public float roundToDecimalPlaces(float value, int places) {
-        float scale = (float) Math.pow(10, places);
-        return Math.round(value * scale) / scale;
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Float.toString(value));
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.floatValue();
     }
 
     public void setSliderPosition(float position)

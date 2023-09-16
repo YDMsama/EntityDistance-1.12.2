@@ -1,17 +1,25 @@
 package com.ydmsama.entitydistance.client.gui;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import com.ydmsama.entitydistance.EntityDistance;
 import com.ydmsama.entitydistance.config.ModConfig;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.settings.GameSettings;
-
-import static com.ydmsama.entitydistance.client.gui.CustomGameSettings.myOptions.ENTITY_RENDER_DISTANCE;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 
 public class CustomGuiOptions extends GuiOptions {
     private CustomGuiSlider renderDistanceSlider;
 
     public float roundToDecimalPlaces(float value, int places) {
-        float scale = (float) Math.pow(10, places);
-        return Math.round(value * scale) / scale;
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Float.toString(value));
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.floatValue();
     }
 
     public CustomGuiOptions(GuiScreen parentScreenIn, GameSettings gameSettingsIn) {
@@ -29,14 +37,13 @@ public class CustomGuiOptions extends GuiOptions {
 
             @Override
             public void setEntryValue(int id, float value) {
-                ModConfig.renderDistanceMultiplier = roundToDecimalPlaces(value * 100F, 2);
-
+                ModConfig.renderDistanceMultiplier = value;
             }
 
             @Override
             public void setEntryValue(int id, String value) {
             }
-        }, 0, this.width / 2 - 155, this.height / 6 + 1 * 16, "Entity Render Distance", 0, 500, roundToDecimalPlaces((float) ModConfig.renderDistanceMultiplier * 100.0F, 2), null);
+        }, 0, this.width / 2 - 155, this.height / 6 + 1 * 16, "Entity Render Distance", 0, 500, (float) ModConfig.renderDistanceMultiplier * 100.0F, null);
 
         this.buttonList.add(this.renderDistanceSlider);
     }
@@ -44,8 +51,11 @@ public class CustomGuiOptions extends GuiOptions {
     @Override
     public void onGuiClosed() {
         super.onGuiClosed();
+        ModConfig.renderDistanceMultiplier = this.renderDistanceSlider.getSliderValue() / 100.0F;
 
-        ModConfig.renderDistanceMultiplier = roundToDecimalPlaces(this.renderDistanceSlider.getSliderValue() / 100.0F, 2);
+//        ModConfig.renderDistanceMultiplier = roundToDecimalPlaces(this.renderDistanceSlider.getSliderValue() / 100.0F, 2);
+        ConfigChangedEvent.OnConfigChangedEvent event = new ConfigChangedEvent.OnConfigChangedEvent(EntityDistance.MOD_ID, null, false, false);
+        MinecraftForge.EVENT_BUS.post(event);
     }
 }
 
