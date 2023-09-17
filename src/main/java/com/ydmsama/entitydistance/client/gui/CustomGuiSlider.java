@@ -1,62 +1,4 @@
-package com.ydmsama.entitydistance.client.gui;//package com.ydmsama.entitydistance.client.gui;
-//
-//import com.ydmsama.entitydistance.config.ModConfig;
-//import net.minecraft.client.Minecraft;
-//import net.minecraft.client.gui.GuiButton;
-//import net.minecraft.client.renderer.GlStateManager;
-//import net.minecraft.util.math.MathHelper;
-//
-//public class CustomGuiSlider extends GuiButton {
-//    private float sliderValue;
-//    private boolean isDragging;
-//    private float valStep = 10.0F;
-//
-//    public CustomGuiSlider(int buttonId, int x, int y, String buttonText, float initialValue) {
-//        super(buttonId, x, y, 150, 20, buttonText);
-//        this.sliderValue = initialValue;
-//    }
-//
-//    @Override
-//    protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
-//        if (this.visible) {
-//            if (this.isDragging) {
-//                this.sliderValue = (float)(mouseX - (this.x + 4)) / (float)(this.width - 8);
-//                this.sliderValue = MathHelper.clamp(this.sliderValue, 0.0F, 500.0F);
-//                this.sliderValue = Math.round(this.sliderValue * valStep) / valStep;
-//                // Update your config value here
-//                ModConfig.renderDistanceMultiplier = this.sliderValue;
-//                this.displayString = "Entity Render Distance" + this.sliderValue;
-//            }
-//
-////            mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
-//            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-//            this.drawTexturedModalRect(this.x + (int)(this.sliderValue * (float)(this.width - 8)), this.y, 0, 66, 4, 20);
-//            this.drawTexturedModalRect(this.x + (int)(this.sliderValue * (float)(this.width - 8)) + 4, this.y, 196, 66, 4, 20);
-//        }
-//    }
-//
-//    @Override
-//    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
-//        if (super.mousePressed(mc, mouseX, mouseY)) {
-//            this.sliderValue = (float)(mouseX - (this.x + 4)) / (float)(this.width - 8);
-//            this.sliderValue = MathHelper.clamp(this.sliderValue, 0.0F, 1.0F);
-//            this.isDragging = true;
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//
-//    @Override
-//    public void mouseReleased(int mouseX, int mouseY) {
-//        this.isDragging = false;
-//    }
-//
-//    public float getSliderValue() {
-//        return this.sliderValue;
-//    }
-//}
-
+package com.ydmsama.entitydistance.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -81,9 +23,9 @@ public class CustomGuiSlider extends GuiButton
     private final float max;
     private final GuiPageButtonList.GuiResponder responder;
     private GuiSlider.FormatHelper formatHelper;
-    private float valStep = 50.0F;
+    private float valStep;
 
-    public CustomGuiSlider(GuiPageButtonList.GuiResponder guiResponder, int idIn, int x, int y, String nameIn, float minIn, float maxIn, float defaultValue, GuiSlider.FormatHelper formatter)
+    public CustomGuiSlider(GuiPageButtonList.GuiResponder guiResponder, int idIn, int x, int y, String nameIn, float minIn, float maxIn, float defaultValue, GuiSlider.FormatHelper formatter, float valStep)
     {
         super(idIn, x, y, 150, 20, "");
         this.name = nameIn;
@@ -93,6 +35,7 @@ public class CustomGuiSlider extends GuiButton
         this.formatHelper = formatter;
         this.responder = guiResponder;
         this.displayString = this.getDisplayString();
+        this.valStep = valStep;
     }
 
     public float getSliderValue()

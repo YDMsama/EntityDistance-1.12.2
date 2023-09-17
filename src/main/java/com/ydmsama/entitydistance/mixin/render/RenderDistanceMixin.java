@@ -26,7 +26,6 @@ public class RenderDistanceMixin {
             d0 = 1.0D;
         }
 
-//        d0 = d0 * 1.0D * 128.0D * renderDistanceWeight;
         d0 = d0 * 64.0D * ModConfig.renderDistanceMultiplier * renderDistanceWeight;
 
         boolean result = distance < d0 * d0;

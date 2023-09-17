@@ -10,10 +10,9 @@ public class EntityTrackerStorage {
 
     public void storeInitValues(Entity entity, int initRange, int initMaxRange) {
         try {
-            System.out.println("Inside storeInitValues");  // For debugging
+            System.out.println("Inside storeInitValues");
             if (entity == null) {
-                // Log an error or throw an exception
-                System.out.println("Entity is null");  // For debugging
+                System.out.println("Entity is null");
                 return;
             }
             initRangeMap.put(entity, initRange);

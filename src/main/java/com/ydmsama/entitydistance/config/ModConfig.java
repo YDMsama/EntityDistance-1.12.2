@@ -14,6 +14,6 @@ public class ModConfig {
 
     @Config.Name("track Distance Multiplier")
     @Config.Comment("Multiplier for entity track distance. Default is 2.0D (200%)")
-    @Config.RangeDouble(min = 1.0D, max = 5.0D)
+    @Config.RangeDouble(min = 0.0D, max = 5.0D)
     public static double trackDistanceMultiplier = 2.0D;
 }
