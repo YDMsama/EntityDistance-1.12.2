@@ -3,6 +3,7 @@ package com.ydmsama.entitydistance.client.gui;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import com.ydmsama.entitydistance.EntityDistance;
+import com.ydmsama.entitydistance.OldConfig;
 import com.ydmsama.entitydistance.config.ModConfig;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.settings.GameSettings;

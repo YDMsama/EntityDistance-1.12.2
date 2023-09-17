@@ -6,10 +6,8 @@ import com.ydmsama.entitydistance.client.gui.CustomGuiOptions;
 import com.ydmsama.entitydistance.config.ModConfig;
 import com.ydmsama.entitydistance.mixin.gui.GuiOptionsAccessor;
 //import com.ydmsama.entitydistance.mixin.gui.GuiVideoSettingsAccessor;
-import com.ydmsama.entitydistance.mixin.tracker.EntityTrackerAccessor;
-import com.ydmsama.entitydistance.mixin.tracker.EntityTrackerEntryAccessor;
+import com.ydmsama.entitydistance.mixin.tracker.*;
 import net.minecraft.client.gui.GuiOptions;
-import net.minecraft.client.gui.GuiVideoSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.EntityTrackerEntry;
@@ -28,25 +26,26 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
-import static com.ydmsama.entitydistance.DefaultValues.DefaultMaxRange;
-import static com.ydmsama.entitydistance.DefaultValues.DefaultRange;
 
 
 @Mod(modid = EntityDistance.MOD_ID)
 public class EntityDistance {
     public static final String MOD_ID = "entitydistance";
+    public static EntityTrackerStorage storage;
+
 
     @Mod.EventHandler
     public void onPreInit(FMLPreInitializationEvent event) {
         System.out.println("Hello world!");
+        storage = new EntityTrackerStorage();
         MinecraftForge.EVENT_BUS.register(new ConfigEventHandler());
         MinecraftForge.EVENT_BUS.register(new PlayerLoginHandler());
         MinecraftForge.EVENT_BUS.register(new GuiOpenHandler());
+        OldConfig.oldTrackDistanceMultiplier = 1.0F;
     }
 
     @Mod.EventBusSubscriber(modid = EntityDistance.MOD_ID)
@@ -80,20 +79,39 @@ public class EntityDistance {
 
                 Iterator<EntityTrackerEntry> iterator = entries.iterator();
 
+                List<Entity> UnloadedEntityList = ((WorldAccessor)worldServer).getUnloadedEntityList();
+                List<Entity> loadedEntityList = ((WorldAccessor)worldServer).getloadedEntityList();
+
                 while (iterator.hasNext()) {
                     EntityTrackerEntry oldEntry = iterator.next();
                     Entity entity = ((EntityTrackerEntryAccessor) oldEntry).gettrackedEntity();
-
+                    EntityRegistry.EntityRegistration er = net.minecraftforge.fml.common.registry.EntityRegistry.instance().lookupModSpawn(entity.getClass(), true);
+                    assert er != null;
                     EntityTrackerEntry newEntry = new EntityTrackerEntry(
                             entity,
-                            (int) (DefaultRange * ModConfig.trackDistanceMultiplier),
-                            (int) (DefaultMaxRange * ModConfig.trackDistanceMultiplier),
+                            storage.getInitRange(entity),
+                            storage.getInitMaxRange(entity),
+//                        (int) (((ITrackDistanceMixin) oldEntry).entityDistance_1_12_2$getInitRange() * ModConfig.trackDistanceMultiplier),
+//                        (int) (((ITrackDistanceMixin) oldEntry).entityDistance_1_12_2$getInitMaxRange() * ModConfig.trackDistanceMultiplier),
+//                        ((EntityTrackerEntryAccessor) oldEntry).getRange(),
+//                        ((EntityTrackerEntryAccessor) oldEntry).getmaxRange(),
                             ((EntityTrackerEntryAccessor) oldEntry).getupdateFrequency(),
                             ((EntityTrackerEntryAccessor) oldEntry).getsendVelocityUpdates()
                     );
-
+//                loadedEntityList.remove(entity);
+//                loadedEntityList.add(entity);
                     newEntries.add(newEntry);
                 }
+//                List<EntityTrackerEntry> entriesList = new ArrayList<>(entries);
+//                for (int i = 0; i < entriesList.size(); i++) {
+//                    EntityTrackerEntry oldEntry = entriesList.get(i);
+//                    Entity entity = ((EntityTrackerEntryAccessor) oldEntry).gettrackedEntity();
+//                    tracker.untrack(entity);
+//                }
+                for (Entity entity : loadedEntityList) {
+                    tracker.untrack(entity);
+                }
+
 
                 entries.clear();
                 TrackedEntityHashTable.clearMap();
@@ -128,7 +146,7 @@ public class EntityDistance {
 //                    TrackedEntityHashTable.addKey(entity.getEntityId(), entry);
 //                    entry.updatePlayerEntities(accessor.getWorldServer().playerEntities);
 //                }
-
+                OldConfig.oldTrackDistanceMultiplier = ModConfig.trackDistanceMultiplier;
             }
         }
     }
@@ -157,20 +175,40 @@ public class EntityDistance {
 
             Iterator<EntityTrackerEntry> iterator = entries.iterator();
 
+            List<Entity> UnloadedEntityList = ((WorldAccessor)worldServer).getUnloadedEntityList();
+            List<Entity> loadedEntityList = ((WorldAccessor)worldServer).getloadedEntityList();
+
+
             while (iterator.hasNext()) {
                 EntityTrackerEntry oldEntry = iterator.next();
                 Entity entity = ((EntityTrackerEntryAccessor) oldEntry).gettrackedEntity();
-
+                EntityRegistry.EntityRegistration er = net.minecraftforge.fml.common.registry.EntityRegistry.instance().lookupModSpawn(entity.getClass(), true);
+                assert er != null;
                 EntityTrackerEntry newEntry = new EntityTrackerEntry(
                         entity,
-                        (int) (DefaultRange * ModConfig.trackDistanceMultiplier),
-                        (int) (DefaultMaxRange * ModConfig.trackDistanceMultiplier),
+                        storage.getInitRange(entity),
+                        storage.getInitMaxRange(entity),
+//                        (int) (((ITrackDistanceMixin) oldEntry).entityDistance_1_12_2$getInitRange() * ModConfig.trackDistanceMultiplier),
+//                        (int) (((ITrackDistanceMixin) oldEntry).entityDistance_1_12_2$getInitMaxRange() * ModConfig.trackDistanceMultiplier),
+//                        ((EntityTrackerEntryAccessor) oldEntry).getRange(),
+//                        ((EntityTrackerEntryAccessor) oldEntry).getmaxRange(),
                         ((EntityTrackerEntryAccessor) oldEntry).getupdateFrequency(),
                         ((EntityTrackerEntryAccessor) oldEntry).getsendVelocityUpdates()
                 );
-
+//                loadedEntityList.remove(entity);
+//                loadedEntityList.add(entity);
                 newEntries.add(newEntry);
             }
+//            List<EntityTrackerEntry> entriesList = new ArrayList<>(entries);
+//            for (int i = 0; i < entriesList.size(); i++) {
+//                EntityTrackerEntry oldEntry = entriesList.get(i);
+//                Entity entity = ((EntityTrackerEntryAccessor) oldEntry).gettrackedEntity();
+//                tracker.untrack(entity);
+//            }
+            for (Entity entity : loadedEntityList) {
+                tracker.untrack(entity);
+            }
+
 
             entries.clear();
             TrackedEntityHashTable.clearMap();
@@ -206,7 +244,7 @@ public class EntityDistance {
 //                TrackedEntityHashTable.addKey(entity.getEntityId(), entry);
 //                entry.updatePlayerEntities(accessor.getWorldServer().playerEntities);
 //            }
-
+            OldConfig.oldTrackDistanceMultiplier = ModConfig.trackDistanceMultiplier;
         }
 
     }

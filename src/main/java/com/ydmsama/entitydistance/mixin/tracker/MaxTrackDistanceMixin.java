@@ -1,6 +1,6 @@
 package com.ydmsama.entitydistance.mixin.tracker;
 
-import com.ydmsama.entitydistance.DefaultValues;
+import com.ydmsama.entitydistance.OldConfig;
 import com.ydmsama.entitydistance.config.ModConfig;
 import net.minecraft.world.WorldServer;
 import net.minecraft.entity.EntityTracker;
@@ -19,8 +19,8 @@ public class MaxTrackDistanceMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onInit(WorldServer theWorldIn, CallbackInfo ci) {
-        DefaultValues.DefaultMaxRange = this.maxTrackingDistanceThreshold;
-        this.maxTrackingDistanceThreshold = (int)(DefaultValues.DefaultMaxRange * ModConfig.trackDistanceMultiplier);
+//        OldConfig.oldTrackDistanceMultiplier = ModConfig.trackDistanceMultiplier;
+//        this.maxTrackingDistanceThreshold = (int)(this.maxTrackingDistanceThreshold * ModConfig.trackDistanceMultiplier);
 //        this.maxTrackingDistanceThreshold *= 2;
     }
 }

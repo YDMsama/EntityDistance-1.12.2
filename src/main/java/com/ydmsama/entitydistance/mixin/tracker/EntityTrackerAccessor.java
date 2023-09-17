@@ -18,4 +18,6 @@ public interface EntityTrackerAccessor {
     IntHashMap<EntityTrackerEntry> getTrackedEntityHashTable();
     @Accessor("world")
     WorldServer getWorldServer();
+    @Accessor("maxTrackingDistanceThreshold")
+    int getMaxTrackingDistanceThreshold();
 }

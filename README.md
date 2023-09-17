@@ -1,2 +1,6 @@
-# forge-mixin-example
-An example for using Mixin in Minecraft Forge
+TODO:
+修复降低追踪距离导致的问题/实体追踪距离不同步的问题
+让实体追踪距离和渲染距离同步
+允许对不同类别的实体设置不同的追踪和渲染距离
+
+
