@@ -1,27 +1,15 @@
 package com.ydmsama.entitydistance.client.gui;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import com.ydmsama.entitydistance.EntityDistance;
 import com.ydmsama.entitydistance.config.ModConfig;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 
 public class CustomGuiOptions extends GuiOptions {
     private CustomGuiSlider renderDistanceSlider;
     private CustomGuiSlider trackDistanceSlider;
-
-    public float roundToDecimalPlaces(float value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = new BigDecimal(Float.toString(value));
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.floatValue();
-    }
 
     public CustomGuiOptions(GuiScreen parentScreenIn, GameSettings gameSettingsIn) {
         super(parentScreenIn, gameSettingsIn);

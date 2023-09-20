@@ -3,7 +3,6 @@ package com.ydmsama.entitydistance.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiPageButtonList;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlider;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -22,8 +21,8 @@ public class CustomGuiSlider extends GuiButton
     private final float min;
     private final float max;
     private final GuiPageButtonList.GuiResponder responder;
-    private GuiSlider.FormatHelper formatHelper;
-    private float valStep;
+    private final GuiSlider.FormatHelper formatHelper;
+    private final float valStep;
 
     public CustomGuiSlider(GuiPageButtonList.GuiResponder guiResponder, int idIn, int x, int y, String nameIn, float minIn, float maxIn, float defaultValue, GuiSlider.FormatHelper formatter, float valStep)
     {

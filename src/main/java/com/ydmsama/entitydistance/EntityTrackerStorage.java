@@ -9,17 +9,8 @@ public class EntityTrackerStorage {
     private final HashMap<Entity, Integer> initMaxRangeMap = new HashMap<>();
 
     public void storeInitValues(Entity entity, int initRange, int initMaxRange) {
-        try {
-            System.out.println("Inside storeInitValues");
-            if (entity == null) {
-                System.out.println("Entity is null");
-                return;
-            }
-            initRangeMap.put(entity, initRange);
-            initMaxRangeMap.put(entity, initMaxRange);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        initRangeMap.put(entity, initRange);
+        initMaxRangeMap.put(entity, initMaxRange);
     }
 
     public Integer getInitRange(Entity entity) {
