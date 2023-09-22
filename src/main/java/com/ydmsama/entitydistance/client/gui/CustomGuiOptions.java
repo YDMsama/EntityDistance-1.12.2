@@ -6,7 +6,10 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class CustomGuiOptions extends GuiOptions {
     private CustomGuiSlider renderDistanceSlider;
     private CustomGuiSlider trackDistanceSlider;

@@ -9,7 +9,8 @@ import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.EntityTrackerEntry;
 import net.minecraft.util.IntHashMap;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -37,8 +38,6 @@ public class EntityTrackerUtils {
         while (iterator.hasNext()) {
             EntityTrackerEntry oldEntry = iterator.next();
             Entity entity = ((EntityTrackerEntryAccessor) oldEntry).gettrackedEntity();
-            EntityRegistry.EntityRegistration er = net.minecraftforge.fml.common.registry.EntityRegistry.instance().lookupModSpawn(entity.getClass(), true);
-            assert er != null;
             EntityTrackerEntry newEntry = new EntityTrackerEntry(
                     entity,
                     storage.getInitRange(entity),
