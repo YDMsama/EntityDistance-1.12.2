@@ -13,8 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
     public class TrackDistanceMixin {
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onInit(Entity entityIn, int rangeIn, int maxRangeIn, int updateFrequencyIn, boolean sendVelocityUpdatesIn, CallbackInfo ci) {
-        ((EntityTrackerEntryAccessor) this).setRange((int) (rangeIn * ModConfig.trackDistanceMultiplier));
-        ((EntityTrackerEntryAccessor) this).setmaxRange((int) (maxRangeIn * ModConfig.trackDistanceMultiplier));
+        double multiplier = ModConfig.getEntityTrackMultiplier(entityIn);
+        ((EntityTrackerEntryAccessor) this).setRange((int) (rangeIn * multiplier));
+        ((EntityTrackerEntryAccessor) this).setmaxRange((int) (maxRangeIn * multiplier));
         EntityDistance.storage.storeInitValues(entityIn, rangeIn, maxRangeIn);
     }
 }
