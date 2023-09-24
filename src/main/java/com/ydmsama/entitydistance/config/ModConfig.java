@@ -17,7 +17,7 @@ public class ModConfig {
     @Config.RangeDouble(min = 0.0D, max = 5.0D)
     public static double renderDistanceMultiplier = 2.5D;
 
-    @Config.Name("track Distance Multiplier")
+    @Config.Name("Track Distance Multiplier")
     @Config.Comment("Multiplier for entity track distance. Default is 2.0D (200%)")
     @Config.RangeDouble(min = 0.0D, max = 5.0D)
     public static double trackDistanceMultiplier = 2.0D;
@@ -26,12 +26,14 @@ public class ModConfig {
     @Config.Comment("List of entity IDs that are exempted from any changes.")
     public static String[] entityList = new String[]{};
 
-    @Config.Name("Custom Entity Track Multipliers")
-    @Config.Comment("A map of entities and their specific track distance multipliers. e.g. \"minecraft:zombie\" = 2.0")
-    public static Map<String, Double> customEntityTrackMultipliers = new HashMap<>();
+    @Config.Comment({
+            "Custom Entity Track Multipliers.",
+            "Format: 'entityID,multiplier'. e.g. 'minecraft:zombie,2.0'"
+    })
+    public static String[] CustomEntityTrackMultipliers = {};
 
-    @Config.Comment("Set to true to treat the 'entityList' as a whitelist (only entities in the list are affected). Set to false to treat it as a blacklist.")
-    public static boolean useWhitelist = false;
+    @Config.Comment("Set to true to treat the 'blackList' as a whitelist (only entities in the list are affected). Set to false to treat it as a blacklist.")
+    public static boolean Whitelist = false;
     public static double getEntityTrackMultiplier(Entity entity) {
         ResourceLocation entityId = EntityList.getKey(entity);
         String entityIdString = entityId != null ? entityId.toString() : null;
@@ -40,20 +42,41 @@ public class ModConfig {
             return trackDistanceMultiplier;
         }
 
-        List<String> entityList = Arrays.asList(ModConfig.entityList);
+        List<String> entityListNames = Arrays.asList(ModConfig.entityList);
 
-        if (!entityList.isEmpty()) {
-            if (ModConfig.useWhitelist) {
-                if (!entityList.contains(entityIdString)) {
-                    return 1.0;
-                }
-            } else {
-                if (entityList.contains(entityIdString)) {
-                    return 1.0;
-                }
+        if (ModConfig.Whitelist) {
+            if (entityListNames.isEmpty()) {
+                return 1.0;
+            }
+            else if (!entityListNames.contains(entityIdString)) {
+                return 1.0;
+            }
+        }
+        else {
+            if (entityListNames.contains(entityIdString)) {
+                return 1.0;
             }
         }
 
-        return ModConfig.customEntityTrackMultipliers.getOrDefault(entityIdString, trackDistanceMultiplier);
+        Map<String, Double> multipliers = parseEntityTrackMultipliers();
+        return multipliers.getOrDefault(entityIdString, trackDistanceMultiplier);
+    }
+
+
+    public static Map<String, Double> parseEntityTrackMultipliers() {
+        Map<String, Double> result = new HashMap<>();
+        for (String entry : CustomEntityTrackMultipliers) {
+            String[] parts = entry.split(",");
+            if (parts.length == 2) {
+                try {
+                    String entityID = parts[0].trim();
+                    double multiplier = Double.parseDouble(parts[1].trim());
+                    result.put(entityID, multiplier);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 }

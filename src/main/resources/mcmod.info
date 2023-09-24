@@ -1,11 +1,11 @@
 [
-{
-  "modid": "${mod_id}",
-  "name": "${mod_name}",
-  "description": "${mod_description}",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "authorList": ["ydmsama"]
-}
+  {
+    "modid": "${mod_id}",
+    "name": "${mod_name}",
+    "description": "${mod_description}",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "authorList": ["ydmsama"]
+  }
 ]
