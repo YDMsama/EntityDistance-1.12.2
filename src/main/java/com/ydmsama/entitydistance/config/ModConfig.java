@@ -23,12 +23,15 @@ public class ModConfig {
     public static double trackDistanceMultiplier = 2.0D;
 
     @Config.Name("Entity Blacklist")
-    @Config.Comment("List of entity IDs that are exempted from any changes.")
+    @Config.Comment({
+            "List of entity IDs that are exempted from any changes.",
+            "Format: 'entityID'. e.g. minecraft:zombie"
+    })
     public static String[] entityList = new String[]{};
 
     @Config.Comment({
             "Custom Entity Track Multipliers.",
-            "Format: 'entityID,multiplier'. e.g. 'minecraft:zombie,2.0'"
+            "Format: 'entityID,multiplier'. e.g. minecraft:zombie,2.0"
     })
     public static String[] CustomEntityTrackMultipliers = {};
 
