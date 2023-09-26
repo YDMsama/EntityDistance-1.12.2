@@ -1,4 +1,5 @@
 Entity Distance Mod
+
 Render entities from greater distances or reduce that for improved performance. (Customizable for each entity type)
 
 Introduction
