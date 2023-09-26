@@ -35,7 +35,7 @@ This simple mod allows you to customize the rendering and tracking distances for
 **Q**: Is this mod server-side or client-side?  
 **A**: This mod can function on both the server and client sides.
 
-## Future Plans 
+## FutureFuture Plans 
 
 - Global settings for hostile (and other faction) entities.
 - Custom configurations for specific entities, e.g., projectiles.
