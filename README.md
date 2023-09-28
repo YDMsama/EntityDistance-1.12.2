@@ -1,6 +1,6 @@
 # Entity Distance Mod 
 
-Render entities from greater distances or reduce that for improved performance. (Customizable for each entity type)
+Rendering entities from greater distances or reduce that for improved performance. (Customizable for each entity type)
 
 ## Introduction 
 
@@ -47,3 +47,7 @@ If you've identified a bug or wish to propose a new feature, kindly create an is
 ## License 
 
 This mod is released under the MIT license. Kindly refer to the LICENSE file for more details.
+
+## Other
+
+thanks to [forge-mixin-example](https://github.com/mouse0w0/forge-mixin-example) for their mixin template! 
