@@ -4,7 +4,7 @@ Render entities from greater distances or reduce that for improved performance. 
 
 ## Introduction 
 
-This simple mod allows you to customize the rendering and tracking distances for entities in Minecraft. For instance, you can opt to see hostile entities from farther away and render neutral entities like animals at closer distances, thus optimizing both FPS and network performance. 
+This simple mod allows you to customize the rendering and tracking distances for entities in Minecraft1.12.2. For instance, you can opt to see hostile entities from farther away and render neutral entities like animals at closer distances, thus optimizing both FPS and network performance. 
 
 ### Glossary: 
 

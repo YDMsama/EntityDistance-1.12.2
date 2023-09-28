@@ -13,14 +13,14 @@ import static com.ydmsama.entitydistance.EntityDistance.MOD_ID;
 public class ModConfig {
 
     @Config.Name("Render Distance Multiplier")
-    @Config.Comment("Multiplier for entity render distance. Default is 2.5D (250%)")
+    @Config.Comment("Multiplier for entity render distance. Default is 1.0D (100%)")
     @Config.RangeDouble(min = 0.0D, max = 5.0D)
-    public static double renderDistanceMultiplier = 2.5D;
+    public static double renderDistanceMultiplier = 1.0D;
 
     @Config.Name("Track Distance Multiplier")
-    @Config.Comment("Multiplier for entity track distance. Default is 2.0D (200%)")
+    @Config.Comment("Multiplier for entity track distance. Default is 1.0D (100%)")
     @Config.RangeDouble(min = 0.0D, max = 5.0D)
-    public static double trackDistanceMultiplier = 2.0D;
+    public static double trackDistanceMultiplier = 1.0D;
 
     @Config.Name("Entity Blacklist")
     @Config.Comment({
