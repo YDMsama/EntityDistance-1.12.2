@@ -51,10 +51,3 @@ This mod is released under the MIT license. Kindly refer to the LICENSE file for
 ## Other
 
 thanks to [forge-mixin-example](https://github.com/mouse0w0/forge-mixin-example) for their mixin template! 
-
-
-调整实体渲染距离。
-调整实体追踪距离。
-在设置菜单中提供滑块，便于调整。
-实体黑名单/白名单
-自定义实体追踪乘数
