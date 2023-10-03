@@ -21,6 +21,13 @@ This simple mod allows you to customize the rendering and tracking distances for
 - Entity Blacklist/Whitelist
 - Custom Entity Track Multipliers
 
+## Commands
+- /entitydistance <configName> <value> (Possible <configName>: renderDistanceMultiplier, trackDistanceMultiplier, Whitelist, entityblacklist, customentitytrackmultipliers)
+- /entitylistadd <entityID>
+- /entitylistremove <entityID>
+- /customlistadd <entityID>,<multiplier>
+- /customlistremove <entityID>
+
 ## Installation 
 
 1. Download the latest version of Entity Distance Mod.
