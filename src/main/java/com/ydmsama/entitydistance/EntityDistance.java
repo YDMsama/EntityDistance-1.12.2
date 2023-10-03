@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = EntityDistance.MOD_ID, name = "Entity Distance", version = "1.0.0")
+@Mod(modid = EntityDistance.MOD_ID, name = "Entity Distance", version = "1.0.1")
 public class EntityDistance {
     public static final String MOD_ID = "entitydistance";
     public static EntityTrackerStorage storage;

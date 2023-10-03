@@ -23,6 +23,8 @@ This simple mod allows you to customize the rendering and tracking distances for
 
 ## Commands
 - /entitydistance <configName> <value> (Possible <configName>: renderDistanceMultiplier, trackDistanceMultiplier, Whitelist, entityblacklist, customentitytrackmultipliers)
+- /setrenderdistance <value>
+- /settrackdistance <value>
 - /entitylistadd <entityID>
 - /entitylistremove <entityID>
 - /customlistadd <entityID>,<multiplier>
