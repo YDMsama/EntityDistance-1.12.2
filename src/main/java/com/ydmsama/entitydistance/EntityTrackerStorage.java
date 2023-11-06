@@ -21,8 +21,8 @@ public class EntityTrackerStorage {
         return initMaxRangeMap.getOrDefault(entity, null);
     }
 
-    public void removeEntry(Entity entity) {
-        initRangeMap.remove(entity);
-        initMaxRangeMap.remove(entity);
-    }
+//    public void removeEntry(Entity entity) {
+//        initRangeMap.remove(entity);
+//        initMaxRangeMap.remove(entity);
+//    }
 }

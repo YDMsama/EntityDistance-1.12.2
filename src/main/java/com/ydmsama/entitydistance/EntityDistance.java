@@ -3,7 +3,7 @@ package com.ydmsama.entitydistance;
 import com.ydmsama.entitydistance.cmd.*;
 import com.ydmsama.entitydistance.handlers.ConfigEventHandler;
 import com.ydmsama.entitydistance.handlers.GuiOpenHandler;
-import com.ydmsama.entitydistance.handlers.PlayerLoginHandler;
+//import com.ydmsama.entitydistance.handlers.PlayerLoginHandler;
 import com.ydmsama.entitydistance.handlers.WorldLoadHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;

@@ -10,12 +10,12 @@ public interface EntityTrackerEntryAccessor {
 
     @Accessor("range")
     void setRange(int newRange);
-    @Accessor("range")
-    int getRange();
+//    @Accessor("range")
+//    int getRange();
     @Accessor("trackedEntity")
     Entity gettrackedEntity();
-    @Accessor("maxRange")
-    int getmaxRange();
+//    @Accessor("maxRange")
+//    int getmaxRange();
     @Accessor("maxRange")
     void setmaxRange(int newmaxRange);
     @Accessor("updateFrequency")

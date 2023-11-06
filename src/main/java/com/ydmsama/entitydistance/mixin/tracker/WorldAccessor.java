@@ -10,8 +10,8 @@ import java.util.List;
 @Mixin(World.class)
 public interface WorldAccessor {
 
-    @Accessor("unloadedEntityList")
-    List<Entity> getUnloadedEntityList();
+//    @Accessor("unloadedEntityList")
+//    List<Entity> getUnloadedEntityList();
     @Accessor("loadedEntityList")
     List<Entity> getloadedEntityList();
 }

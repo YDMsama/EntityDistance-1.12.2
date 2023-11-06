@@ -9,8 +9,6 @@ import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.EntityTrackerEntry;
 import net.minecraft.util.IntHashMap;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -32,7 +30,7 @@ public class EntityTrackerUtils {
 
         Iterator<EntityTrackerEntry> iterator = entries.iterator();
 
-        List<Entity> unloadedEntityList = ((WorldAccessor) worldServer).getUnloadedEntityList();
+//        List<Entity> unloadedEntityList = ((WorldAccessor) worldServer).getUnloadedEntityList();
         List<Entity> loadedEntityList = ((WorldAccessor) worldServer).getloadedEntityList();
 
         while (iterator.hasNext()) {
