@@ -55,7 +55,7 @@ public class ModConfig {
         @Config.Name("Player Entity Track Multiplier")
         @Config.Comment("Multiplier for player entity track distance.")
         @Config.RangeDouble(min = 0.0D, max = 5.0D)
-        public double playerMultiplier = 0.5D;
+        public double playerMultiplier = 1.5D;
 
 //        @Config.Name("Neutral Entity Track Multiplier")
 //        @Config.Comment("Multiplier for neutral entity track distance. Set 0 to disable.")
