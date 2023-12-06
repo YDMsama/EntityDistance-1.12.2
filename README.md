@@ -8,8 +8,12 @@ This simple mod allows you to customize the rendering and tracking distances for
 
 ### Glossary: 
 
-- **Entity Rendering Distance**: The distance within which entities are rendered on the client-side. (Affects client performance) 
-- **Entity Tracking Distance**: The distance within which the server sends data about entities to the client, enabling them to be tracked. (Affects server performance) 
+- **Entity Rendering Distance**: The maximum distance at which entities are visually displayed on the client-side. This setting directly impacts client-side performance.
+    - *Example*: Setting the rendering distance to its maximum allows all entities to be visually displayed at the full extent of their tracking distance. Conversely, setting it to zero results in no entities being rendered, although they are still being tracked by the server.
+    - *Practical Tip*: If you're using a less powerful computer, you can decrease the rendering distance to ensure entities are only visually displayed when they are closer, which can help improve performance.
+
+- **Entity Tracking Distance**: This refers to the range within which the server communicates information about entities to the client, making it possible for them to be tracked and eventually rendered. This setting affects server performance.
+    - *Note*: For an entity to be rendered, it must first be within the tracking distance. Thus, the actual rendering distance of an entity is the lesser of the set rendering and tracking distances.
 
 > Note: If you aim to increase an entity's rendering distance, you must also increase its tracking distance. An entity must first be tracked before it can be rendered.
 
