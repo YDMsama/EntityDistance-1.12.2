@@ -7,6 +7,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityWaterMob;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
 
@@ -32,6 +33,10 @@ public class ModConfig {
         @Config.Comment("Set to true to enable the NonLiving Entity Track Multiplier.")
         public boolean enableNonLivingMultiplier = false;
 
+        @Config.Name("Enable Player Entity Track Multiplier")
+        @Config.Comment("Set to true to enable the Player Entity Track Multiplier.")
+        public boolean enablePlayerMultiplier = false;
+
         @Config.Name("Animal Track Multiplier")
         @Config.Comment("Multiplier for animal track distance.")
         @Config.RangeDouble(min = 0.0D, max = 5.0D)
@@ -47,6 +52,11 @@ public class ModConfig {
         @Config.RangeDouble(min = 0.0D, max = 5.0D)
         public double nonLivingMultiplier = 0.5D;
 
+        @Config.Name("Player Entity Track Multiplier")
+        @Config.Comment("Multiplier for player entity track distance.")
+        @Config.RangeDouble(min = 0.0D, max = 5.0D)
+        public double playerMultiplier = 0.5D;
+
 //        @Config.Name("Neutral Entity Track Multiplier")
 //        @Config.Comment("Multiplier for neutral entity track distance. Set 0 to disable.")
 //        @Config.RangeDouble(min = 0.0D, max = 5.0D)
@@ -59,7 +69,7 @@ public class ModConfig {
     }
 
     @Config.Name("Render Distance Multiplier")
-    @Config.Comment("Multiplier for entity render distance. Default is 1.0D (100%)")
+    @Config.Comment("Multiplier for global entity render distance. Default is 1.0D (100%)")
     @Config.RangeDouble(min = 0.0D, max = 5.0D)
     public static double renderDistanceMultiplier = 1.0D;
 
@@ -84,6 +94,9 @@ public class ModConfig {
     @Config.Comment("Set to true to treat the 'blackList' as a whitelist (only entities in the list are affected). Set to false to treat it as a blacklist.")
     public static boolean Whitelist = false;
     public static double getEntityTrackMultiplier(Entity entity) {
+        if(entitySettings.enablePlayerMultiplier && entity instanceof EntityPlayerMP){
+            return entitySettings.playerMultiplier;
+        }
         if(entitySettings.enableNonLivingMultiplier && !(entity instanceof EntityLiving)){
             return entitySettings.nonLivingMultiplier;
         }

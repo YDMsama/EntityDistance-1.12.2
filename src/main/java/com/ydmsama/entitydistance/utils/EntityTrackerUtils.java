@@ -27,7 +27,6 @@ public class EntityTrackerUtils {
         }
 
         Set<EntityTrackerEntry> newEntries = Sets.newHashSet();
-
         Iterator<EntityTrackerEntry> iterator = entries.iterator();
 
 //        List<Entity> unloadedEntityList = ((WorldAccessor) worldServer).getUnloadedEntityList();
