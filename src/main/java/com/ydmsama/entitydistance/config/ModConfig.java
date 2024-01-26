@@ -80,7 +80,7 @@ public class ModConfig {
 
     @Config.Name("Entity Blacklist")
     @Config.Comment({
-            "List of entity IDs that are exempted from any changes.",
+            "List of entity IDs that are exempted from any changes.(tracking distance only)",
             "Format: 'entityID'. e.g. minecraft:zombie"
     })
     public static String[] entityList = new String[]{};
