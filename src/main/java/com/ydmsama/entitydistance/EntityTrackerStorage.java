@@ -1,12 +1,12 @@
 package com.ydmsama.entitydistance;
 
 import net.minecraft.entity.Entity;
-
-import java.util.HashMap;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 public class EntityTrackerStorage {
-    private final HashMap<Entity, Integer> initRangeMap = new HashMap<>();
-    private final HashMap<Entity, Integer> initMaxRangeMap = new HashMap<>();
+    private final Map<Entity, Integer> initRangeMap = new WeakHashMap<>();
+    private final Map<Entity, Integer> initMaxRangeMap = new WeakHashMap<>();
 
     public void storeInitValues(Entity entity, int initRange, int initMaxRange) {
         initRangeMap.put(entity, initRange);
@@ -21,8 +21,5 @@ public class EntityTrackerStorage {
         return initMaxRangeMap.getOrDefault(entity, null);
     }
 
-//    public void removeEntry(Entity entity) {
-//        initRangeMap.remove(entity);
-//        initMaxRangeMap.remove(entity);
-//    }
 }
+
