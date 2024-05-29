@@ -18,6 +18,10 @@ import static com.ydmsama.entitydistance.EntityDistance.MOD_ID;
 @Config(modid = MOD_ID)
 public class ModConfig {
 
+    @Config.Name("Use Mod GUI")
+    @Config.Comment("Whether to use the Mod GUI. Default is true.")
+    public static boolean useModGui = true;
+
     public static EntitySettings entitySettings = new EntitySettings();
 
     public static class EntitySettings {

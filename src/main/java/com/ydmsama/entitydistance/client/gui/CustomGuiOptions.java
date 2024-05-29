@@ -2,11 +2,19 @@ package com.ydmsama.entitydistance.client.gui;
 
 import com.ydmsama.entitydistance.EntityDistance;
 import com.ydmsama.entitydistance.config.ModConfig;
+import com.ydmsama.entitydistance.utils.EntityTrackerUtils;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
+import net.minecraft.entity.EntityTracker;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.DimensionType;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -65,7 +73,13 @@ public class CustomGuiOptions extends GuiOptions {
         ModConfig.renderDistanceMultiplier = this.renderDistanceSlider.getSliderValue() / 100.0F;
         ModConfig.trackDistanceMultiplier = this.trackDistanceSlider.getSliderValue() / 100.0F;
 
-        ConfigChangedEvent.OnConfigChangedEvent event = new ConfigChangedEvent.OnConfigChangedEvent(EntityDistance.MOD_ID, null, false, false);
-        MinecraftForge.EVENT_BUS.post(event);
+        if (FMLCommonHandler.instance().getMinecraftServerInstance() != null) {
+            ConfigChangedEvent.OnConfigChangedEvent event = new ConfigChangedEvent.OnConfigChangedEvent(EntityDistance.MOD_ID, null, false, false);
+            MinecraftForge.EVENT_BUS.post(event);
+        }else{
+            int valueAsInt = (int)(Math.round(ModConfig.renderDistanceMultiplier * 100));
+            ModConfig.renderDistanceMultiplier = valueAsInt / 100.0;
+            ConfigManager.sync(EntityDistance.MOD_ID, Config.Type.INSTANCE);
+        }
     }
 }
